@@ -102,7 +102,7 @@ Returns true if the provided value is a promise-based observable.
 
 -   `value`  any
 
-Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## lazyObservable
 
@@ -210,7 +210,7 @@ emitting when new values become available. The expressions respect (trans)action
 **Parameters**
 
 -   `expression`  
--   `fireImmediately` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** (by default false)
+-   `fireImmediately` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** (by default false)
 
 **Examples**
 
@@ -314,7 +314,7 @@ Like normal `when`, except that this `when` will automatically dispose if the co
 
 -   `expr`  
 -   `action`  
--   `timeout` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum amount when spends waiting before giving up (optional, default `10000`)
+-   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum amount when spends waiting before giving up (optional, default `10000`)
 -   `onTimeout` **any** the ontimeout handler will be called if the condition wasn't met within the given time (optional, default `()`)
 
 **Examples**
@@ -342,6 +342,31 @@ Returns **IDisposer** disposer function that can be used to cancel the when prem
 
 ## keepAlive
 
+MobX normally suspends any computed value that is not in use by any reaction,
+and lazily re-evaluates the expression if needed outside a reaction while not in use.
+`keepAlive` marks a computed value as always in use, meaning that it will always fresh, but never disposed automatically.
+
+**Parameters**
+
+-   `_1`  
+-   `_2`  
+-   `target` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** an object that has a computed property, created by `@computed` or `extendObservable`
+-   `property` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the name of the property to keep alive
+
+**Examples**
+
+```javascript
+const obj = observable({
+  number: 3,
+  doubler: function() { return this.number * 2 }
+})
+const stop = keepAlive(obj, "doubler")
+```
+
+Returns **IDisposer** stops this keep alive so that the computed value goes back to normal behavior
+
+## keepAlive
+
 **Parameters**
 
 -   `_1`  
@@ -361,31 +386,6 @@ stop()
 
 Returns **IDisposer** stops this keep alive so that the computed value goes back to normal behavior
 
-## keepAlive
-
-MobX normally suspends any computed value that is not in use by any reaction,
-and lazily re-evaluates the expression if needed outside a reaction while not in use.
-`keepAlive` marks a computed value as always in use, meaning that it will always fresh, but never disposed automatically.
-
-**Parameters**
-
--   `_1`  
--   `_2`  
--   `target` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an object that has a computed property, created by `@computed` or `extendObservable`
--   `property` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** the name of the property to keep alive
-
-**Examples**
-
-```javascript
-const obj = observable({
-  number: 3,
-  doubler: function() { return this.number * 2 }
-})
-const stop = keepAlive(obj, "doubler")
-```
-
-Returns **IDisposer** stops this keep alive so that the computed value goes back to normal behavior
-
 ## queueProcessor
 
 `queueProcessor` takes an observable array, observes it and calls `processor`
@@ -393,9 +393,9 @@ once for each item added to the observable array, optionally deboucing the actio
 
 **Parameters**
 
--   `observableArray` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;T>** observable array instance to track
+-   `observableArray` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;T>** observable array instance to track
 -   `processor`  
--   `debounce` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** optional debounce time in ms. With debounce 0 the processor will run synchronously (optional, default `0`)
+-   `debounce` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** optional debounce time in ms. With debounce 0 the processor will run synchronously (optional, default `0`)
 
 **Examples**
 
@@ -422,10 +422,10 @@ chunks and/or single items into reasonable chunks of work.
 
 **Parameters**
 
--   `observableArray` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;T>** observable array instance to track
+-   `observableArray` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;T>** observable array instance to track
 -   `processor`  
--   `debounce` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** optional debounce time in ms. With debounce 0 the processor will run synchronously (optional, default `0`)
--   `maxChunkSize` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** optionally do not call on full array but smaller chunks. With 0 it will process the full array. (optional, default `0`)
+-   `debounce` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** optional debounce time in ms. With debounce 0 the processor will run synchronously (optional, default `0`)
+-   `maxChunkSize` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** optionally do not call on full array but smaller chunks. With 0 it will process the full array. (optional, default `0`)
 
 **Examples**
 
@@ -459,7 +459,7 @@ Countdown example: <https://jsfiddle.net/mweststrate/na0qdmkw/>
 
 **Parameters**
 
--   `interval` **([number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) \| `"frame"`)** interval in milliseconds about how often the interval should update (optional, default `1000`)
+-   `interval` **([number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number) \| `"frame"`)** interval in milliseconds about how often the interval should update (optional, default `1000`)
 
 **Examples**
 
@@ -546,7 +546,7 @@ class Store {
 }
 ```
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ## whenAsync
 
@@ -555,7 +555,7 @@ Like normal `when`, except that this `when` will return a promise that resolves 
 **Parameters**
 
 -   `fn`  
--   `timeout` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum amount of time to wait, before the promise rejects
+-   `timeout` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** maximum amount of time to wait, before the promise rejects
 
 **Examples**
 
